@@ -1,0 +1,31 @@
+<!-- W more_records.html -->
+{% if mode == 'basic' %}
+    <!-- Podstawowe rekordy -->
+    <div id="basic-dns-div">
+        {% for record in ["A", "AAAA", "MX", "NS", "CNAME", "TXT", "SOA","DKIM","SPF"] %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="record_types" value="{{ record }}" id="{{ record }}" checked>
+                <label class="form-check-label" for="{{ record }}">
+                    {{ record }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+        <button type="button" class="btn btn-primary mt-2" hx-get="/more_records?mode=all" hx-target="#records-and-button" hx-swap="innerHTML">Wszystkie dnsy</button>
+
+{% else %}
+    <!-- Wszystkie rekordy (łącznie z podstawowymi) -->
+    <div id="all-dns-div">
+        {% set basic_records = ["A", "AAAA", "MX", "NS", "CNAME", "TXT", "SOA","DKIM","SPF"] %} <!-- Lista podstawowych rekordów -->
+        {% for record in ["A", "AAAA", "MX", "NS", "CNAME", "TXT", "SOA", "PTR", "SRV", "SPF", "DKIM", "DMARC", "NAPTR", "DS", "RRSIG", "NSEC", "DNAME", "SSHFP", "LOC", "TLSA"] %}
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="record_types" value="{{ record }}" id="{{ record }}" {% if record in basic_records %}checked{% endif %}>
+                <label class="form-check-label" for="{{ record }}">
+                    {{ record }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn btn-primary mt-2" hx-get="/more_records?mode=basic" hx-target="#records-and-button" hx-swap="innerHTML">Podstawowe dnsy</button>
+{% endif %}

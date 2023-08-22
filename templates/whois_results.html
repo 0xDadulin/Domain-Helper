@@ -1,0 +1,56 @@
+
+<div class="result-box">
+    
+
+<h3>Dane Whois domeny: <a href="http://{{ domain }}" target="_blank"><b>{{ domain }}</b></a></h3>
+
+    {% if result is string %}
+        <p>{{ result }}</p>
+    {% else %}
+        <h2>Informacje ogólne</h2>
+        <table>
+            <tr>
+                <th>Domena</th>
+                <td>{{ result.get('domainName', 'Brak danych') }}</td>
+            </tr>
+            <tr>
+                <th>Rejestrator</th>
+                <td>{{ result.get('registrarName', 'Brak danych') }}</td>
+            </tr>
+            <tr>
+                <th>Data utworzenia</th>
+                <td>{{ result.get('registryData', {}).get('createdDate', 'Brak danych') }}</td>
+            </tr>
+            <tr>
+                <th>Data modyfikacji</th>
+                <td>{{ result.get('registryData', {}).get('updatedDate', 'Brak danych') }}</td>
+            </tr>
+            <tr>
+                <th>Data wygaśnięcia</th>
+                <td>{{ result.get('registryData', {}).get('expiresDate', 'Brak danych') }}</td>
+            </tr>
+        </table>
+
+        <h3>Serwery DNS:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Nazwa serwera</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ns in result.get('registryData', {}).get('nameServers', {}).get('hostNames', []) %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ ns }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Surowy tekst:</h3>
+        <pre>{{ result.get('registryData', {}).get('rawText', 'Brak danych') }}</pre>
+    {% endif %}
+ 
+</div>

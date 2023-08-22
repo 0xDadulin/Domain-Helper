@@ -1,0 +1,63 @@
+<div class="result-box">
+
+    <h3>Dane certyfikatu SSL dla domeny: <a href="http://{{ domain }}" target="_blank"><b>{{ domain }}</b></a></h3>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Host</th>
+                <td>{{ ssl_data["host"] }}</td>
+            </tr>
+            <tr>
+                <th>IP</th>
+                <td>{{ ssl_data["ip"] }}</td>
+            </tr>
+            <tr>
+                <th>Typ serwera</th>
+                <td>{{ ssl_data["server_type"] }}</td>
+            </tr>
+            <tr>
+                <th>Certyfikat wygaśnie za (dni)</th>
+                <td>{{ ssl_data["days_to_expire"] }}</td>
+            </tr>
+            <tr>
+                <th>Nazwa wspólna</th>
+                <td>{{ ssl_data["common_name"] }}</td>
+            </tr>
+            <tr>
+                <th>SANs</th>
+                <td>{{ ssl_data["sans"] }}</td>
+            </tr>
+            <tr>
+                <th>Organizacja</th>
+                <td>{{ ssl_data["organization"] }}</td>
+            </tr>
+            <tr>
+                <th>Lokalizacja</th>
+                <td>{{ ssl_data["location"] }}</td>
+            </tr>
+            <tr>
+                <th>Ważny od</th>
+                <td>{{ ssl_data["valid_from"] }}</td>
+            </tr>
+            <tr>
+                <th>Ważny do</th>
+                <td>{{ ssl_data["valid_to"] }}</td>
+            </tr>
+            <tr>
+                <th>Numer seryjny</th>
+                <td>{{ ssl_data["serial_number"] }}</td>
+            </tr>
+            <tr>
+                <th>Algorytm podpisu</th>
+                <td>{{ ssl_data["signature_algorithm"] }}</td>
+            </tr>
+            <tr>
+                <th>Wystawca</th>
+                <td>{{ ssl_data["issuer"] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

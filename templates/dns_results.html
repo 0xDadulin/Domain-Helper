@@ -1,0 +1,22 @@
+{% for data in all_dns_data %}
+<div class="result-box">
+    <h3>Informacje o domenie: <a href="http://{{ data.domain }}" target="_blank"><b>{{ data.domain }}</b></a></h3>
+    <p><small>Ostatnie sprawdzenie:<b> {{ timestamp }}</small></b></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Typ rekordu</th>
+                <th>Wartość</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in data.dns_data.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}

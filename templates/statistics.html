@@ -1,0 +1,10 @@
+<div class="container mt-4">
+    <h2>Statystyki serwisu</h2>
+    <div id="plot-container">
+        <div id="plotly-div"></div>
+        <script>
+            var plot_data = {{ plot|safe }};
+            Plotly.newPlot('plotly-div', plot_data.data, plot_data.layout);
+        </script>
+    </div>
+</div>
