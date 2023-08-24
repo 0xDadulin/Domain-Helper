@@ -5,7 +5,7 @@
 
                     <form hx-post="/check_dns" hx-target="#dns-section" hx-swap="afterbegin">
     <div class="input-group mb-2">
-        <input type="text" name="domain" placeholder="Wprowadź domenę (lub domeny oddzielone przecinkiem)" class="form-control">
+        <input type="text" name="domain" placeholder="Wprowadź domenę (lub domeny oddzielone spacją lub przecinkiem)" class="form-control">
         <button type="submit" class="btn btn-primary">
     Sprawdź
     <span class="spinner-border spinner-border-sm htmx-indicator" role="status" aria-hidden="true"></span>
@@ -32,13 +32,15 @@
             <!-- Wyświetlanie historii zapytań z sesji -->
           <hr>
           <br>
+          
 {% if session['dns_history'] %}
+          <h3> Twoja historia wyszukiwań 🔽 </h3>
     {% for history_entry in session['dns_history']|reverse  %}
         {% for data in history_entry['all_dns_data'] %}
         <div class="result-box">
             <h3 class="mt-4">Informacje o domenie:  <a href="http://{{ data.domain }}" target="_blank"><b>{{ data.domain }}</b></a></h3>
             <p><small>Ostatnie sprawdzenie:<b> {{ history_entry['timestamp'] }}</small></b></p>
-            <table class="table">
+            <table class="table table-dark table-hover ">
                 <thead>
                     <tr>
                         <th>Typ rekordu</th>
@@ -49,7 +51,16 @@
                     {% for key, value in data.dns_data.items() %}
                     <tr>
                         <td>{{ key }}</td>
-                        <td>{{ value }}</td>
+                        <td>
+    {{ value }}
+    {% if not "Błąd" in value %}
+                            {% if ".az.pl" in value or ".online.pro" in value %}
+                                <span class="az-pl-logo"></span>
+                            {% elif ".strefa.pl" in value or ".emailserver.pl" in value or ".strefa.home-whs.pl" in value %}
+                                <span class="strefa-pl-logo"></span>
+                            {% endif %}
+                        {% endif %}
+</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -58,6 +69,7 @@
         {% endfor %}
     {% endfor %}
 {% endif %}
+
 
         
         <!-- Nowe sekcje z wynikami DNS zostaną dodane tutaj -->

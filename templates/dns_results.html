@@ -1,8 +1,11 @@
+
+
 {% for data in all_dns_data %}
-<div class="result-box">
+<div class="result-box border-success ">
+
     <h3>Informacje o domenie: <a href="http://{{ data.domain }}" target="_blank"><b>{{ data.domain }}</b></a></h3>
     <p><small>Ostatnie sprawdzenie:<b> {{ timestamp }}</small></b></p>
-    <table class="table">
+    <table class="table table-hover" >
         <thead>
             <tr>
                 <th>Typ rekordu</th>
@@ -13,7 +16,16 @@
             {% for key, value in data.dns_data.items() %}
             <tr>
                 <td>{{ key }}</td>
-                <td>{{ value }}</td>
+                <td>
+    {{ value }}
+    {% if not "Błąd" in value %}
+                    {% if ".az.pl" in value or ".online.pro" in value %}
+                        <span class="az-pl-logo"></span>
+                    {% elif ".strefa.pl" in value or ".emailserver.pl" in value %}
+                        <span class="strefa-pl-logo"></span>
+                    {% endif %}
+                {% endif %}
+</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -16,7 +16,7 @@ from helpers import *
 
 
 app = Flask(__name__)
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=2)
 app.secret_key = os.environ['app.secret_key']
 app.register_blueprint(main_routes)
 app.register_blueprint(components)
@@ -28,11 +28,20 @@ timezone = pytz.timezone('Europe/Warsaw')
 
 @app.route('/check_dns', methods=['POST'])
 def check_dns():
-    domains = [dom.strip() for dom in request.form.get('domain').split(',')]
+    raw_input = request.form.get('domain')
+    domains = extract_domains(raw_input) 
+    print(domains)
+
+    # Sprawdzanie czy lista domen jest pusta
+    if not domains or all(not d for d in domains):
+        flash('Proszę podać domenę.', 'error')
+        return render_template('alert_message.html')
+
     for domain in domains:
         error_page = check_domain(domain)  
         if error_page:
             return error_page
+
     records_to_fetch = request.form.getlist('record_types')
     all_dns_data = []
 
@@ -71,6 +80,7 @@ def check_dns():
 @app.route('/check_ssl', methods=['POST'])
 def check_ssl():
     domain = request.form.get('ssl_domain')
+    domain = domain.strip()
     error_page = check_domain(domain)
 
     if error_page:
@@ -115,6 +125,8 @@ def check_ssl():
 @app.route('/whois_checker', methods=['POST'])
 def whois_checker():
     domain = request.form.get('domain')
+    domain = domain.strip()
+    print(domain)
     error_page = check_domain(domain)  
     if error_page:
         return error_page

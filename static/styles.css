@@ -95,6 +95,7 @@ body {
     border: 1px solid #3a3a3a;
     padding: 15px;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .result-box h3 {
@@ -139,3 +140,35 @@ body {
     color: #a5a5a5 !important;
     text-decoration: underline !important;
 }
+.az-pl-logo {
+    display: inline-block;  /* Włączanie bloku w linię */
+    color: green;           /* Kolor czcionki na zielony */
+    font-weight: bold;      /* Pogrubienie tekstu */
+    background: url('/static/logo-az-200x200.png') no-repeat center;  /* Dodanie logo */
+    background-size: 30px;  /* Zwiększenie rozmiaru logo do 30px szerokości */
+    width: 30px;            /* Ustawienie szerokości na szerokość logo */
+    height: 30px;           /* Ustawienie wysokości na wysokość logo */
+    margin-left: 3ch;       /* Dodanie 3 spacji od lewej strony */
+    vertical-align: middle; /* Wyśrodkowanie tekstu pionowo względem logo */
+}
+
+.strefa-pl-logo {
+    display: inline-block;  /* Włączanie bloku w linię */
+    color: green;           /* Kolor czcionki na zielony */
+    font-weight: bold;      /* Pogrubienie tekstu */
+    background: url('/static/logo-strefa-pl.png') no-repeat center;  /* Dodanie logo */
+    background-size: 50px;  /* Zwiększenie rozmiaru logo do 30px szerokości */
+    width: 50px;            /* Ustawienie szerokości na szerokość logo */
+    height: 50px;           /* Ustawienie wysokości na wysokość logo */
+    margin-left: 3ch;       /* Dodanie 3 spacji od lewej strony */
+    vertical-align: middle; /* Wyśrodkowanie tekstu pionowo względem logo */
+}
+
+.border-success {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important;
+  border-width: 1px !important;  /* Zwiększenie szerokości konturu */
+  box-shadow: 0 0 10px 2px rgba(var(--bs-success-rgb), 0.6);  /* Dodanie cienia wokół konturu dla lepszego efektu "świecenia" */
+}
+
+

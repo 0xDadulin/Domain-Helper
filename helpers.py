@@ -15,6 +15,9 @@ import os
 import pandas as pd
 import time
 import plotly.graph_objects as go
+import csv
+
+
 import babel.dates as babel_dates
 
 
@@ -23,34 +26,13 @@ TIME_LIMIT = timedelta(seconds=5)
 def format_date(date_obj):
     return babel_dates.format_date(date_obj, format='d MMM', locale='pl_PL')
 
-def check_domain(domain):
-    # Sprawdzenie, czy domena nie jest pusta lub czy nie składa się tylko z białych znaków
-    if not domain or domain.isspace():
-        flash('Proszę podać domenę.', 'error')
-        return render_template('alert_message.html')
+def log_error(domain):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    with open('errors.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([domain, timestamp])
 
-    # Weryfikacja domeny za pomocą wyrażeń regularnych
-    pattern = r'^([a-z0-9]([a-z0-9\-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$'
-    if not re.match(pattern, domain, re.IGNORECASE):
-        flash('Niepoprawny format domeny.', 'error')
-        return render_template('alert_message.html')
 
-    # Sprawdzenie, czy od ostatniego sprawdzenia tej domeny minął czas określony w TIME_LIMIT
-    now = datetime.now()
-    if 'LAST_CHECKED' not in session:
-        session['LAST_CHECKED'] = {}
-
-    if domain in session['LAST_CHECKED']:
-        last_checked_time = datetime.strptime(session['LAST_CHECKED'][domain], '%Y-%m-%d %H:%M:%S')
-        if now - last_checked_time < TIME_LIMIT:
-            flash(f'Proszę poczekać {TIME_LIMIT.seconds} sekund przed ponownym sprawdzeniem tej domeny.', 'error')
-            return render_template('alert_message.html')
-
-    # Aktualizacja czasu sprawdzenia w sesji
-    session['LAST_CHECKED'][domain] = now.strftime('%Y-%m-%d %H:%M:%S')
-    session.modified = True
-
-    return None  # zwróć None jeśli wszystko jest w porządku
 
 def zapisz_statystyke(funkcja, domena, current_time):
     plik = "statystyki.csv"
@@ -159,3 +141,47 @@ def generate_plot():
     )
     return fig
 
+def extract_domains(input_string):
+    # Usuń wielokrotne spacje
+    input_string = re.sub(r'\s+', ' ', input_string)
+    
+    # Rozdziel na podstawie przecinka i spacji
+    domains = re.split(r'[ ,]+', input_string)
+
+    # Usuń puste elementy
+    domains = [domain for domain in domains if domain]
+
+    return domains
+
+
+def check_domain(domain):
+    # Sprawdzenie, czy domena nie jest pusta lub czy nie składa się tylko z białych znaków
+    if not domain or domain.isspace():
+        flash('Proszę podać domenę.', 'error')
+        log_error(domain)
+        return render_template('alert_message.html')
+
+    # Weryfikacja domeny za pomocą wyrażeń regularnych
+    pattern = r"^(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$"
+
+    if not re.match(pattern, domain, re.IGNORECASE):
+        flash('Niepoprawny format domeny.', 'error')
+        log_error(domain)
+        return render_template('alert_message.html')
+
+    # Sprawdzenie, czy od ostatniego sprawdzenia tej domeny minął czas określony w TIME_LIMIT
+    now = datetime.now()
+    if 'LAST_CHECKED' not in session:
+        session['LAST_CHECKED'] = {}
+
+    if domain in session['LAST_CHECKED']:
+        last_checked_time = datetime.strptime(session['LAST_CHECKED'][domain], '%Y-%m-%d %H:%M:%S')
+        if now - last_checked_time < TIME_LIMIT:
+            flash(f'Proszę poczekać {TIME_LIMIT.seconds} sekund przed ponownym sprawdzeniem tej domeny.', 'error')
+            return render_template('alert_message.html')
+
+    # Aktualizacja czasu sprawdzenia w sesji
+    session['LAST_CHECKED'][domain] = now.strftime('%Y-%m-%d %H:%M:%S')
+    session.modified = True
+
+    return None  # zwróć None jeśli wszystko jest w porządku
