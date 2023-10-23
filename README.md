@@ -1,1 +1,24 @@
-Web application developed in Flask, providing domain analysis services like DNS lookup, SSL certificate verification, and WHOIS data retrieval. It employs a modular architecture with blueprints for organized routing and component logic. Utilizes libraries such as dns.resolver, ssl, and requests for domain analysis tasks, and facilitates user input through interactive forms, displaying results in dedicated views. The app implements error logging and function usage statistics to CSV files, and visualizes usage statistics using the Plotly library. It also manages session data to store user query history and validates domain formats for enhanced user experience.
+Domain Analysis App
+A comprehensive web application built using Flask to provide domain analysis services.
+
+Features
+DNS Lookup: Extract domain name system details in real-time.
+SSL Certificate Verification: Confirm the authenticity and details of SSL certificates.
+WHOIS Data Retrieval: Fetch registration and ownership details of domains.
+Modular Architecture: Efficiently structured with blueprints to separate main routes and component logic.
+User-Friendly Interactivity: Accepts user inputs through dynamic forms and showcases results in dedicated views.
+Logging and Statistics: Tracks errors and function usage in CSV logs. Also, visualizes usage statistics with the Plotly library.
+Enhanced UX: Validates domain formats, manages session data to remember user query history and timestamps, and uses regular expressions for domain verification.
+Libraries Used
+dns.resolver
+ssl
+socket
+requests
+Plotly (for visualization)
+Quick Start
+Visit the web app: Domain Helper
+
+Note: Since the application is hosted on Replit, there might be a brief 5-15 second delay the first time you access it as the server initializes.
+
+Feedback and Contribution
+Feel free to raise issues if you find bugs or wish to add enhancements. Contributions are always welcome!
