@@ -12,12 +12,11 @@ A comprehensive web application built using Flask to provide domain analysis ser
 - **Logging and Statistics**: Tracks errors and function usage in CSV logs. Also, visualizes usage statistics with the Plotly library.
 - **Enhanced UX**: Validates domain formats, manages session data to remember user query history and timestamps, and uses regular expressions for domain verification.
 
-## Libraries Used
+## Technologies Used
 
-- `dns.resolver`
-- `ssl`
-- `socket`
-- `requests`
+- Flask
+- Tailwind
+- HTMX
 - Plotly (for visualization)
 
 ## Quick Start
