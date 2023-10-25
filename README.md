@@ -2,6 +2,18 @@
 
 A comprehensive web application built using Flask to provide domain analysis services.
 
+## Quick Start
+
+Visit the web app: [Domain Helper](https://domain-helper2.0xdadulin.repl.co/)
+
+**Note**: Since the application is hosted on Replit, there might be a brief 5-15 second delay the first time you access it as the server initializes.
+
+### Video Presentation
+
+Watch a brief video presentation of the application:
+
+[![Domain Analysis App Video Presentation](https://img.youtube.com/vi/fc9409f483f443c995734fbd3bb841b5/0.jpg)](https://www.loom.com/share/fc9409f483f443c995734fbd3bb841b5)
+
 ## Features
 
 - **DNS Lookup**: Extract domain name system details in real-time.
@@ -18,12 +30,6 @@ A comprehensive web application built using Flask to provide domain analysis ser
 - Tailwind
 - HTMX
 - Plotly (for visualization)
-
-## Quick Start
-
-Visit the web app: [Domain Helper](https://domain-helper2.0xdadulin.repl.co/)
-
-**Note**: Since the application is hosted on Replit, there might be a brief 5-15 second delay the first time you access it as the server initializes.
 
 ## Feedback and Contribution
 
