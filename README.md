@@ -12,7 +12,7 @@ Visit the web app: [Domain Helper](https://domain-helper2.0xdadulin.repl.co/)
 
 Watch a brief video presentation of the application:
 
-![Domain Helper Video Presentation](https://www.loom.com/share/fc9409f483f443c995734fbd3bb841b5)
+[Domain Helper Video Presentation](https://www.loom.com/share/fc9409f483f443c995734fbd3bb841b5)
 
 ## Features
 
