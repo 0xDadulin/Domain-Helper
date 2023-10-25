@@ -1,4 +1,4 @@
-# Domain Analysis App
+# Domain Helper 
 
 A comprehensive web application built using Flask to provide domain analysis services.
 
@@ -12,7 +12,7 @@ Visit the web app: [Domain Helper](https://domain-helper2.0xdadulin.repl.co/)
 
 Watch a brief video presentation of the application:
 
-[![Domain Analysis App Video Presentation](https://img.youtube.com/vi/fc9409f483f443c995734fbd3bb841b5/0.jpg)](https://www.loom.com/share/fc9409f483f443c995734fbd3bb841b5)
+![Domain Helper Video Presentation](https://www.loom.com/share/fc9409f483f443c995734fbd3bb841b5)
 
 ## Features
 
